@@ -1001,13 +1001,13 @@
         <!-- Filter Chips -->
         <div class="filter-chips" id="filterChips">
           <button class="filter-chip active" data-category="all">
-            הכל <span class="chip-count" id="countAll">10</span>
+            הכל <span class="chip-count" id="countAll">11</span>
           </button>
           <button class="filter-chip" data-category="hero">
             ⭐ מערכות מרכזיות <span class="chip-count">3</span>
           </button>
           <button class="filter-chip" data-category="daily">
-            📚 כלים יומיומיים <span class="chip-count">2</span>
+            📚 כלים יומיומיים <span class="chip-count">3</span>
           </button>
           <button class="filter-chip" data-category="education">
             👥 חינוך ותלמידים <span class="chip-count">2</span>
@@ -1116,7 +1116,7 @@
             <span class="section-icon">📚</span>
             כלים יומיומיים
           </h2>
-          <span class="section-badge">2 קישורים</span>
+          <span class="section-badge">3 קישורים</span>
         </div>
 
         <div class="cards-grid">
@@ -1156,11 +1156,34 @@
               </div>
             </div>
             <div class="card-actions">
-              <a href="https://docs.google.com/spreadsheets/d/1dvlyEOhFYsrYENYYgYL2UZfrWpHwIpPRMZzJMU5-toY/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              <a href="https://gantt-lavi.web.app/" target="_blank" rel="noopener noreferrer" class="btn-primary">
                 פתיחת הגאנט
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
               </a>
-              <button class="btn-copy" onclick="copyLink('https://docs.google.com/spreadsheets/d/1dvlyEOhFYsrYENYYgYL2UZfrWpHwIpPRMZzJMU5-toY/edit?gid=0#gid=0', 'קישור לגאנט השנתי הועתק!')" title="העתק קישור">
+              <button class="btn-copy" onclick="copyLink('https://gantt-lavi.web.app/', 'קישור לגאנט השנתי הועתק!')" title="העתק קישור">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Printer Guide -->
+          <div class="card link-item" data-title="הגדרת מדפסת אישית" data-desc="מדריך התקנת מדפסת רשת הורדת דרייבר הגדרה לפי כתובת IP במחשב אישי קוניקה מינולטה Konica Minolta Develop" data-cat="daily">
+            <div class="card-top">
+              <div class="card-icon">🖨️</div>
+              <div class="card-content">
+                <div class="card-title-row">
+                  <h3 class="card-title">הגדרת מדפסת אישית</h3>
+                  <span class="card-badge card-badge-green">מדריך ודרייבר</span>
+                </div>
+                <p class="card-desc">מדריך צעד-אחר-צעד, הורדת דרייבר והגדרה ידנית לפי כתובת רשת (IP) של מדפסת התיכון.</p>
+              </div>
+            </div>
+            <div class="card-actions">
+              <a href="printer.html" class="btn-primary">
+                למדריך ולהורדות
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+              <button class="btn-copy" onclick="copyLink('printer.html', 'קישור למדריך המדפסת הועתק!')" title="העתק קישור">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </button>
             </div>
@@ -1585,12 +1608,13 @@
 
     // Copy to clipboard with Toast
     function copyLink(url, message = 'הקישור הועתק ללוח!') {
-      navigator.clipboard.writeText(url).then(() => {
+      const fullUrl = url.startsWith('http') ? url : new URL(url, window.location.href).href;
+      navigator.clipboard.writeText(fullUrl).then(() => {
         showToast(message);
       }).catch(() => {
         // Fallback
         const temp = document.createElement('input');
-        temp.value = url;
+        temp.value = fullUrl;
         document.body.appendChild(temp);
         temp.select();
         document.execCommand('copy');
